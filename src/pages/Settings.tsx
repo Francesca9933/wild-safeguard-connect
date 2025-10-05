@@ -1,6 +1,6 @@
 import Layout from "@/components/Layout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ChevronRight, User, Lock, Users, Activity, Globe, exit } from "lucide-react";
+import { ChevronRight, User, Lock, Users, Activity, Globe, LogOut } from "lucide-react";
 import settingsBg from "@/assets/settings-bg.jpg";
 
 const Settings = () => {
@@ -10,7 +10,7 @@ const Settings = () => {
     { icon: Users, title: "Friends List", description: "View and manage your connections" },
     { icon: Activity, title: "Your Activity", description: "See your sightings and contributions" },
     { icon: Globe, title: "Language and Notifications", description: "Customize app language and alerts" },
-    { icon: exit, title: "Exit", description: "Log-out from your account" },
+    { icon: LogOut, title: "Exit", description: "Log-out from your account" },
   ];
 
   return (
