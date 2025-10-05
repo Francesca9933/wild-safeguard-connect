@@ -39,7 +39,10 @@ const Games = () => {
             </CardHeader>
             <CardContent>
               <div className="h-32 bg-gradient-to-br from-primary/10 to-primary/5 rounded-lg flex items-center justify-center mb-4">
-                <MapPin className="h-12 w-12 text-primary opacity-50" />
+                <img
+                  src={guess}
+                  alt="icon for the game wild guess"
+                />
               </div>
               <Link to="/wild-guess">
                 <Button variant="nature" className="w-full">Start Game</Button>
