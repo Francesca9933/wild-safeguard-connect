@@ -10,6 +10,7 @@ const Settings = () => {
     { icon: Users, title: "Friends List", description: "View and manage your connections" },
     { icon: Activity, title: "Your Activity", description: "See your sightings and contributions" },
     { icon: Globe, title: "Language and Notifications", description: "Customize app language and alerts" },
+    { icon: log-out, title: "Exit", description: "Log-out from your account" },
   ];
 
   return (
