@@ -42,6 +42,7 @@ const Games = () => {
                 <img
                   src={guess}
                   alt="icon for the game wild guess"
+                  className="w-full h-64 object-contain rounded-lg bg-muted"
                 />
               </div>
               <Link to="/wild-guess">
