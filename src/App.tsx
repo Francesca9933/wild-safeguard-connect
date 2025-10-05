@@ -12,6 +12,11 @@ import Report from "./pages/Report";
 import Games from "./pages/Games";
 import Check from "./pages/Check";
 import Articles from "./pages/Articles";
+import Settings from "./pages/Settings";
+import SpeciesGuide from "./pages/SpeciesGuide";
+import QuizSelection from "./pages/QuizSelection";
+import QuizQuestion from "./pages/QuizQuestion";
+import WildGuess from "./pages/WildGuess";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -98,6 +103,46 @@ const App = () => {
               element={
                 <ProtectedRoute session={session}>
                   <Articles />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/settings"
+              element={
+                <ProtectedRoute session={session}>
+                  <Settings />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/species-guide"
+              element={
+                <ProtectedRoute session={session}>
+                  <SpeciesGuide />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/quiz-selection"
+              element={
+                <ProtectedRoute session={session}>
+                  <QuizSelection />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/quiz-question"
+              element={
+                <ProtectedRoute session={session}>
+                  <QuizQuestion />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/wild-guess"
+              element={
+                <ProtectedRoute session={session}>
+                  <WildGuess />
                 </ProtectedRoute>
               }
             />

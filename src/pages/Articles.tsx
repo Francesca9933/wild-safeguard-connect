@@ -1,77 +1,97 @@
 import Layout from "@/components/Layout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { FileText, ExternalLink } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { ExternalLink, Bell } from "lucide-react";
+import { Link } from "react-router-dom";
+import articlesBg from "@/assets/articles-bg.jpg";
 
 const Articles = () => {
-  const articles = [
-    {
-      title: "Conservation Efforts in North American Forests",
-      source: "Wildlife Today",
-      date: "2 days ago",
-      category: "Conservation",
-    },
-    {
-      title: "Understanding Bear Behavior in Mountain Regions",
-      source: "Nature Science Journal",
-      date: "5 days ago",
-      category: "Safety",
-    },
-    {
-      title: "Climate Change Impact on Arctic Species",
-      source: "Environmental Research",
-      date: "1 week ago",
-      category: "Research",
-    },
-    {
-      title: "Urban Wildlife Adaptation Patterns",
-      source: "City Nature",
-      date: "1 week ago",
-      category: "Urban Wildlife",
-    },
-  ];
-
   return (
     <Layout>
-      <div className="p-4 space-y-6">
-        <div className="text-center py-6">
-          <h1 className="text-3xl font-bold mb-2">Articles & Research</h1>
-          <p className="text-muted-foreground">Stay informed about wildlife and conservation</p>
+      <div className="relative min-h-screen">
+        <div 
+          className="fixed inset-0 z-0"
+          style={{
+            backgroundImage: `url(${articlesBg})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundAttachment: 'fixed'
+          }}
+        >
+          <div className="absolute inset-0 bg-background/85 backdrop-blur-sm" />
         </div>
 
-        <div className="space-y-4">
-          {articles.map((article, index) => (
-            <Card key={index} className="shadow-medium hover:shadow-strong transition-shadow cursor-pointer">
-              <CardHeader>
-                <div className="flex items-start justify-between gap-2">
-                  <div className="flex-1">
-                    <CardTitle className="text-lg mb-2 flex items-start gap-2">
-                      <FileText className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                      <span>{article.title}</span>
-                    </CardTitle>
-                    <CardDescription className="flex items-center gap-2">
-                      <span>{article.source}</span>
-                      <span>•</span>
-                      <span>{article.date}</span>
-                    </CardDescription>
-                  </div>
-                  <ExternalLink className="h-5 w-5 text-muted-foreground flex-shrink-0" />
-                </div>
-              </CardHeader>
-              <CardContent>
-                <Badge variant="outline">{article.category}</Badge>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+        <div className="relative z-10 p-4 space-y-6">
+          <div className="text-center py-6">
+            <h1 className="text-3xl font-bold mb-2">Wildlife Articles</h1>
+            <p className="text-muted-foreground">Stay informed about wildlife and conservation</p>
+          </div>
 
-        <Card className="shadow-medium bg-gradient-to-br from-primary/5 to-primary/10">
-          <CardContent className="py-6 text-center">
-            <p className="text-sm text-muted-foreground">
-              Enable notifications in settings to get alerts when new articles are published
-            </p>
-          </CardContent>
-        </Card>
+          <Card className="shadow-medium bg-card/95 backdrop-blur">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Bell className="h-5 w-5" />
+                Notifications
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground mb-3">
+                Enable notifications in settings to get alerts when new articles are published
+              </p>
+              <Link to="/settings">
+                <Button variant="outline" className="w-full">Enable Notifications</Button>
+              </Link>
+            </CardContent>
+          </Card>
+
+          <Card className="shadow-medium bg-card/95 backdrop-blur">
+            <CardHeader>
+              <CardTitle>Conservation Today</CardTitle>
+              <CardDescription>Latest wildlife conservation news</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm mb-4">
+                Discover groundbreaking research and stories from wildlife conservationists around the world.
+              </p>
+              <Button variant="nature" className="w-full">
+                <ExternalLink className="mr-2 h-4 w-4" />
+                Read Article
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card className="shadow-medium bg-card/95 backdrop-blur">
+            <CardHeader>
+              <CardTitle>Habitat Protection</CardTitle>
+              <CardDescription>Understanding ecosystem preservation</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm mb-4">
+                Learn about critical efforts to protect natural habitats and the species that depend on them.
+              </p>
+              <Button variant="nature" className="w-full">
+                <ExternalLink className="mr-2 h-4 w-4" />
+                Read Article
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card className="shadow-medium bg-card/95 backdrop-blur">
+            <CardHeader>
+              <CardTitle>Species Spotlight</CardTitle>
+              <CardDescription>In-depth animal profiles</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm mb-4">
+                Explore detailed profiles of fascinating species and their unique behaviors.
+              </p>
+              <Button variant="nature" className="w-full">
+                <ExternalLink className="mr-2 h-4 w-4" />
+                Read Article
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </Layout>
   );
