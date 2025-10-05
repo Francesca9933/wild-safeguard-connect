@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import wolfFootprint from "@/assets/wolf.jpg";
+import wolf from "@/assets/wolf.jpg";
 import gamesBg from "@/assets/games-bg.jpg";
 
 const QuizQuestion = () => {
@@ -50,7 +50,7 @@ const QuizQuestion = () => {
             <CardContent className="pt-6">
               <div className="mb-6">
                 <img 
-                  src={wolfFootprint} 
+                  src={wolf} 
                   alt="Animal footprint" 
                   className="w-full h-64 object-contain rounded-lg bg-muted"
                 />
