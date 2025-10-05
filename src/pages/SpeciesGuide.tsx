@@ -1,20 +1,20 @@
 import Layout from "@/components/Layout";
 import { Card, CardContent } from "@/components/ui/card";
-import terrestrialImg from "@/assets/species-terrestrial.jpg";
-import aquaticImg from "@/assets/species-aquatic.jpg";
-import treeImg from "@/assets/species-tree.jpg";
-import flyingImg from "@/assets/species-flying.jpg";
-import polarImg from "@/assets/species-polar.jpg";
-import urbanImg from "@/assets/species-urban.jpg";
+import terrestrial from "@/assets/terrestrial.jpg";
+import aquatic from "@/assets/aquatic.jpg";
+import tree from "@/assets/tree.jpg";
+import flying from "@/assets/fly.jpg";
+import polar from "@/assets/polar.jpg";
+import urban from "@/assets/urban.jpg";
 
 const SpeciesGuide = () => {
   const categories = [
-    { name: "Terrestrial", image: terrestrialImg, description: "Land-dwelling mammals, reptiles, and insects" },
-    { name: "Aquatic", image: aquaticImg, description: "Marine and freshwater species" },
-    { name: "Tree Species", image: treeImg, description: "Animals that live in trees" },
-    { name: "Flying", image: flyingImg, description: "Birds and flying mammals" },
-    { name: "Polar & Arctic", image: polarImg, description: "Cold climate specialists" },
-    { name: "Urban", image: urbanImg, description: "City-adapted wildlife" },
+    { name: "Terrestrial", image: terrestrial, description: "Land-dwelling mammals, reptiles, and insects" },
+    { name: "Aquatic", image: aquatic, description: "Marine and freshwater species" },
+    { name: "Tree Species", image: tree, description: "Animals that live in trees" },
+    { name: "Flying", image: flying, description: "Birds and flying mammals" },
+    { name: "Polar & Arctic", image: polar, description: "Cold climate specialists" },
+    { name: "Urban", image: urban, description: "City-adapted wildlife" },
   ];
 
   return (
