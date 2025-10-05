@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 import { MapPin, FileText, Crown } from "lucide-react";
 import { Link } from "react-router-dom";
 import homeBg from "@/assets/home-bg.jpg";
-import terrestrialImg from "@/assets/species-terrestrial.jpg";
-import aquaticImg from "@/assets/species-aquatic.jpg";
+import terrestrial from "@/assets/terrestrial.jpg";
+import aquatic from "@/assets/aquatic.jpg";
 
 const Home = () => {
   return (
@@ -55,13 +55,13 @@ const Home = () => {
             <CardContent>
               <div className="grid grid-cols-2 gap-4">
                 <div className="relative rounded-lg overflow-hidden group cursor-pointer">
-                  <img src={terrestrialImg} alt="Terrestrial species" className="w-full h-48 object-cover" />
+                  <img src={terrestrial} alt="Terrestrial species" className="w-full h-48 object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-4">
                     <span className="text-white font-bold text-lg">Terrestrial</span>
                   </div>
                 </div>
                 <div className="relative rounded-lg overflow-hidden group cursor-pointer">
-                  <img src={aquaticImg} alt="Aquatic species" className="w-full h-48 object-cover" />
+                  <img src={aquatic} alt="Aquatic species" className="w-full h-48 object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-4">
                     <span className="text-white font-bold text-lg">Aquatic</span>
                   </div>
