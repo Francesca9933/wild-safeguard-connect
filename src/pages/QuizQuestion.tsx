@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import wolfFootprint from "@/assets/wolf-footprint.jpg";
+import wolfFootprint from "@/assets/wolf.jpg";
 import gamesBg from "@/assets/games-bg.jpg";
 
 const QuizQuestion = () => {
