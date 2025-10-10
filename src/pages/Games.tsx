@@ -18,7 +18,7 @@ const Games = () => {
             backgroundAttachment: 'fixed'
           }}
         >
-          <div className="absolute inset-0 bg-background/85 backdrop-blur-sm" />
+          <div className="absolute inset-0 bg-background/65 backdrop-blur-sm" />
         </div>
 
         <div className="relative z-10 p-4 space-y-6">
@@ -76,8 +76,12 @@ const Games = () => {
                 <Trophy className="h-12 w-12 text-accent opacity-50" />
               </div>
               <div className="flex gap-2">
-                <Button variant="outline" className="flex-1">Join Challenge</Button>
-                <Button variant="outline" className="flex-1">Create Challenge</Button>
+                <Link to="/join-challenge" className="flex-1">
+                  <Button variant="outline" className="w-full">Join Challenge</Button>
+                </Link>
+                <Link to="/create-challenge" className="flex-1">
+                  <Button variant="outline" className="w-full">Create Challenge</Button>
+                </Link>
               </div>
             </CardContent>
           </Card>

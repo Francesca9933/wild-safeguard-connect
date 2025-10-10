@@ -11,16 +11,32 @@ import { useToast } from "@/hooks/use-toast";
 import reportBg from "@/assets/report-bg.jpg";
 import mapPlaceholder from "@/assets/map-placeholder.jpg";
 
+interface PawMarker {
+  x: number;
+  y: number;
+  id: number;
+}
+
 const Report = () => {
   const { toast } = useToast();
   const [species, setSpecies] = useState("");
   const [pathType, setPathType] = useState("");
   const [notes, setNotes] = useState("");
+  const [pawMarkers, setPawMarkers] = useState<PawMarker[]>([]);
+
+  const handleMapClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    
+    setPawMarkers([...pawMarkers, { x, y, id: Date.now() }]);
+  };
 
   const handleSubmit = () => {
     setSpecies("");
     setPathType("");
     setNotes("");
+    setPawMarkers([]);
     toast({
       title: "Report Submitted!",
       description: "Your sighting has been successfully recorded.",
@@ -39,7 +55,7 @@ const Report = () => {
             backgroundAttachment: 'fixed'
           }}
         >
-          <div className="absolute inset-0 bg-background/85 backdrop-blur-sm" />
+          <div className="absolute inset-0 bg-background/65 backdrop-blur-sm" />
         </div>
 
         <div className="relative z-10 p-4 space-y-6">
@@ -66,8 +82,26 @@ const Report = () => {
 
               <div className="space-y-2">
                 <Label htmlFor="location">Location</Label>
-                <div className="h-48 rounded-lg overflow-hidden">
+                <div 
+                  className="h-48 rounded-lg overflow-hidden relative cursor-crosshair"
+                  onClick={handleMapClick}
+                >
                   <img src={mapPlaceholder} alt="Map" className="w-full h-full object-cover" />
+                  {pawMarkers.map((marker) => (
+                    <div
+                      key={marker.id}
+                      className="absolute w-8 h-8 transform -translate-x-1/2 -translate-y-1/2"
+                      style={{ left: `${marker.x}%`, top: `${marker.y}%` }}
+                    >
+                      <svg viewBox="0 0 24 24" fill="#FFD700" stroke="#8B4513" strokeWidth="1.5" className="w-full h-full drop-shadow-lg">
+                        <path d="M12 18c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3z"/>
+                        <circle cx="8" cy="10" r="2"/>
+                        <circle cx="16" cy="10" r="2"/>
+                        <circle cx="6" cy="15" r="1.5"/>
+                        <circle cx="18" cy="15" r="1.5"/>
+                      </svg>
+                    </div>
+                  ))}
                 </div>
               </div>
 

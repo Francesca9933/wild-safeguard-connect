@@ -1,16 +1,30 @@
 import Layout from "@/components/Layout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChevronRight, User, Lock, Users, Activity, Globe, LogOut } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 import settingsBg from "@/assets/settings-bg.jpg";
 
 const Settings = () => {
+  const navigate = useNavigate();
+  const { toast } = useToast();
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    toast({
+      title: "Logged Out",
+      description: "You have been successfully logged out.",
+    });
+    navigate("/auth");
+  };
+
   const sections = [
-    { icon: User, title: "Account", description: "Manage your profile and preferences" },
-    { icon: Lock, title: "Privacy", description: "Control your privacy settings" },
-    { icon: Users, title: "Friends List", description: "View and manage your connections" },
-    { icon: Activity, title: "Your Activity", description: "See your sightings and contributions" },
-    { icon: Globe, title: "Language and Notifications", description: "Customize app language and alerts" },
-    { icon: LogOut, title: "Exit", description: "Log-out from your account" },
+    { icon: User, title: "Account", description: "Manage your profile and preferences", onClick: () => {} },
+    { icon: Lock, title: "Privacy", description: "Control your privacy settings", onClick: () => {} },
+    { icon: Users, title: "Friends List", description: "View and manage your connections", onClick: () => {} },
+    { icon: Activity, title: "Your Activity", description: "See your sightings and contributions", onClick: () => {} },
+    { icon: Globe, title: "Language and Notifications", description: "Customize app language and alerts", onClick: () => {} },
+    { icon: LogOut, title: "Exit", description: "Log-out from your account", onClick: handleLogout },
   ];
 
   return (
@@ -25,7 +39,7 @@ const Settings = () => {
             backgroundAttachment: 'fixed'
           }}
         >
-          <div className="absolute inset-0 bg-background/85 backdrop-blur-sm" />
+          <div className="absolute inset-0 bg-background/65 backdrop-blur-sm" />
         </div>
 
         <div className="relative z-10 p-4 space-y-6">
@@ -38,7 +52,7 @@ const Settings = () => {
             {sections.map((section) => {
               const Icon = section.icon;
               return (
-                <Card key={section.title} className="shadow-medium bg-card/95 backdrop-blur cursor-pointer hover:shadow-strong transition-all">
+                <Card key={section.title} className="shadow-medium bg-card/95 backdrop-blur cursor-pointer hover:shadow-strong transition-all" onClick={section.onClick}>
                   <CardHeader className="pb-3">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">

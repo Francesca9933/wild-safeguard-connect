@@ -18,7 +18,7 @@ const WildGuess = () => {
             backgroundAttachment: 'fixed'
           }}
         >
-          <div className="absolute inset-0 bg-background/85 backdrop-blur-sm" />
+          <div className="absolute inset-0 bg-background/65 backdrop-blur-sm" />
         </div>
 
         <div className="relative z-10 p-4 space-y-6">

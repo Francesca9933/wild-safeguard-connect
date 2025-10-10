@@ -17,6 +17,8 @@ import SpeciesGuide from "./pages/SpeciesGuide";
 import QuizSelection from "./pages/QuizSelection";
 import QuizQuestion from "./pages/QuizQuestion";
 import WildGuess from "./pages/WildGuess";
+import JoinChallenge from "./pages/JoinChallenge";
+import CreateChallenge from "./pages/CreateChallenge";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -143,6 +145,22 @@ const App = () => {
               element={
                 <ProtectedRoute session={session}>
                   <WildGuess />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/join-challenge"
+              element={
+                <ProtectedRoute session={session}>
+                  <JoinChallenge />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/create-challenge"
+              element={
+                <ProtectedRoute session={session}>
+                  <CreateChallenge />
                 </ProtectedRoute>
               }
             />
