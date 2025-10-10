@@ -3,11 +3,14 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import wolf from "@/assets/wolf.jpg";
 import gamesBg from "@/assets/games-bg.jpg";
 
 const QuizQuestion = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
 
   const handleAnswer = (answer: string) => {
@@ -42,6 +45,15 @@ const QuizQuestion = () => {
         </div>
 
         <div className="relative z-10 p-4 space-y-6">
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            onClick={() => navigate("/games")}
+            className="mb-2"
+          >
+            <ArrowLeft className="h-6 w-6" />
+          </Button>
+
           <div className="text-center py-6">
             <h1 className="text-2xl font-bold mb-2">Question 1 of 10</h1>
           </div>

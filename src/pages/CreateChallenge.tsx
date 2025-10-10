@@ -7,13 +7,15 @@ import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import { Copy, Users } from "lucide-react";
+import { Copy, Users, ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import gamesBg from "@/assets/games-bg.jpg";
 import groupIcon from "@/assets/groupicon.jpg";
 import quizIcon from "@/assets/quizicon.jpg";
 
 const CreateChallenge = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [selectedChallenge, setSelectedChallenge] = useState("");
   const [customChallenge, setCustomChallenge] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -63,6 +65,15 @@ const CreateChallenge = () => {
         </div>
 
         <div className="relative z-10 p-4 space-y-6 pb-24">
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            onClick={() => navigate("/games")}
+            className="mb-2"
+          >
+            <ArrowLeft className="h-6 w-6" />
+          </Button>
+
           <div className="text-center py-6">
             <h1 className="text-3xl font-bold mb-2">Create Challenge</h1>
             <p className="text-muted-foreground">Choose or create your own challenge</p>
