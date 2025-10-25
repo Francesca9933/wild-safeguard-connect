@@ -110,20 +110,20 @@ const Auth = () => {
     setLoading(true);
 
     try {
-      // Researcher login logic - for now using same auth system
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: `${researcherId}@researcher.wildcall.app`,
-        password: researcherPassword,
-      });
+      // Check against researcher credentials
+      if (researcherId === "U123" && researcherPassword === "password") {
+        // Store researcher session
+        sessionStorage.setItem("researcher", "true");
+        
+        toast({
+          title: "Researcher access granted",
+          description: "Welcome to the research portal.",
+        });
 
-      if (error) throw error;
-
-      toast({
-        title: "Researcher access granted",
-        description: "Welcome to the research portal.",
-      });
-
-      navigate("/researcher");
+        navigate("/");
+      } else {
+        throw new Error("Invalid credentials");
+      }
     } catch (error: any) {
       toast({
         title: "Access denied",

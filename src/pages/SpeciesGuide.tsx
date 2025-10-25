@@ -1,5 +1,7 @@
 import Layout from "@/components/Layout";
 import { Card, CardContent } from "@/components/ui/card";
+import { ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import terrestrial from "@/assets/terrestrial.jpg";
 import aquatic from "@/assets/aquatic.jpg";
 import tree from "@/assets/tree.jpg";
@@ -8,6 +10,8 @@ import polar from "@/assets/polar.jpg";
 import urban from "@/assets/urban.jpg";
 
 const SpeciesGuide = () => {
+  const navigate = useNavigate();
+  
   const categories = [
     { name: "Terrestrial", image: terrestrial, description: "Land-dwelling mammals, reptiles, and insects" },
     { name: "Aquatic", image: aquatic, description: "Marine and freshwater species" },
@@ -20,6 +24,14 @@ const SpeciesGuide = () => {
   return (
     <Layout>
       <div className="p-4 space-y-6">
+        <button
+          onClick={() => navigate("/")}
+          className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors mb-4"
+        >
+          <ArrowLeft className="h-5 w-5" />
+          <span>Back to Home</span>
+        </button>
+        
         <div className="text-center py-6">
           <h1 className="text-3xl font-bold mb-2">Species Guide</h1>
           <p className="text-muted-foreground">Explore wildlife by category</p>
