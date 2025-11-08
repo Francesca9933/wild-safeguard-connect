@@ -82,15 +82,17 @@ const Tutorial = ({ onComplete }: { onComplete: () => void }) => {
     elements.forEach(el => {
       el.style.position = 'relative';
       el.style.zIndex = '1001';
-      el.style.transform = 'scale(1.05)';
-      el.style.transition = 'transform 0.3s ease';
+      el.style.boxShadow = '0 0 0 4px rgba(251, 191, 36, 0.8), 0 0 20px 8px rgba(251, 191, 36, 0.4)';
+      el.style.borderRadius = '12px';
+      el.style.transition = 'all 0.3s ease';
     });
 
     return () => {
       elements.forEach(el => {
         el.style.position = '';
         el.style.zIndex = '';
-        el.style.transform = '';
+        el.style.boxShadow = '';
+        el.style.borderRadius = '';
       });
     };
   }, [currentStep]);
@@ -162,11 +164,28 @@ const Tutorial = ({ onComplete }: { onComplete: () => void }) => {
   const step = steps[currentStep];
   const isFinalStep = step.target === "final";
 
+  const getCardPosition = () => {
+    if (isFinalStep) {
+      return 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2';
+    }
+    
+    // Position based on which buttons are highlighted
+    if (step.multiple?.includes('report-bottom') || step.target === 'games-bottom' || step.target === 'check-bottom') {
+      return 'top-1/4 left-1/2 -translate-x-1/2'; // Center top for bottom nav items
+    }
+    
+    if (step.multiple?.includes('articles-bottom')) {
+      return 'top-1/3 left-1/2 -translate-x-1/2'; // Slightly lower for articles
+    }
+    
+    return 'top-1/3 left-1/2 -translate-x-1/2'; // Default center
+  };
+
   return (
     <div className="fixed inset-0 z-[1000]" onClick={handleNextStep}>
       <div className="absolute inset-0 bg-black/70" />
       
-      <div className={`absolute ${isFinalStep ? 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2' : 'top-20 right-4'} z-[1001]`}>
+      <div className={`absolute ${getCardPosition()} z-[1001]`}>
         <Card className="max-w-xs bg-gradient-to-br from-amber-100 to-orange-200 border-4 border-amber-500 shadow-strong animate-bounce-subtle">
           <CardContent className="p-4">
             <div className="flex items-start gap-2">
