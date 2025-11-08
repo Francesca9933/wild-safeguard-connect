@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Copy, Users, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import Footer from "@/components/Footer";
 import gamesBg from "@/assets/games-bg.jpg";
 import groupIcon from "@/assets/groupicon.jpg";
 import quizIcon from "@/assets/quizicon.jpg";
@@ -211,6 +212,7 @@ const CreateChallenge = () => {
             </CardContent>
           </Card>
         </div>
+        <Footer />
       </div>
     </Layout>
   );

@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
+import Footer from "@/components/Footer";
 import gamesBg from "@/assets/games-bg.jpg";
 
 const QuizSelection = () => {
@@ -79,6 +80,7 @@ const QuizSelection = () => {
             </Button>
           </Link>
         </div>
+        <Footer />
       </div>
     </Layout>
   );

@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Bell } from "lucide-react";
 import { Link } from "react-router-dom";
+import Footer from "@/components/Footer";
 import articlesBg from "@/assets/articles-bg.jpg";
 
 const Articles = () => {
@@ -92,6 +93,7 @@ const Articles = () => {
             </CardContent>
           </Card>
         </div>
+        <Footer />
       </div>
     </Layout>
   );

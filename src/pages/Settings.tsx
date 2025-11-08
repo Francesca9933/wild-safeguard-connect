@@ -4,6 +4,7 @@ import { ChevronRight, User, Lock, Users, Activity, Globe, LogOut } from "lucide
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import Footer from "@/components/Footer";
 import settingsBg from "@/assets/settings-bg.jpg";
 
 const Settings = () => {
@@ -72,6 +73,7 @@ const Settings = () => {
             })}
           </div>
         </div>
+        <Footer />
       </div>
     </Layout>
   );

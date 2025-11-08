@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Camera, Upload, Mic } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import Footer from "@/components/Footer";
 import reportBg from "@/assets/report-bg.jpg";
 import mapPlaceholder from "@/assets/map-placeholder.jpg";
 
@@ -165,6 +166,7 @@ const Report = () => {
             </CardContent>
           </Card>
         </div>
+        <Footer />
       </div>
     </Layout>
   );

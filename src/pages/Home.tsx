@@ -3,13 +3,39 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { MapPin, FileText, Crown } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import Tutorial from "@/components/Tutorial";
+import Footer from "@/components/Footer";
 import homeBg from "@/assets/home-bg.jpg";
 import terrestrial from "@/assets/terrestrial.jpg";
 import aquatic from "@/assets/aquatic.jpg";
 
 const Home = () => {
+  const [showTutorial, setShowTutorial] = useState(false);
+
+  useEffect(() => {
+    const checkTutorial = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user?.user_metadata?.show_tutorial) {
+        setShowTutorial(true);
+      }
+    };
+    checkTutorial();
+  }, []);
+
+  const handleTutorialComplete = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (user) {
+      await supabase.auth.updateUser({
+        data: { show_tutorial: false }
+      });
+    }
+    setShowTutorial(false);
+  };
   return (
     <Layout>
+      {showTutorial && <Tutorial onComplete={handleTutorialComplete} />}
       <div className="relative min-h-screen">
         {/* Background Image */}
         <div 
@@ -32,13 +58,13 @@ const Home = () => {
 
           {/* Quick Actions */}
           <div className="grid grid-cols-2 gap-4">
-            <Link to="/report">
+            <Link to="/report" data-tutorial="report-top">
               <Button variant="nature" className="w-full h-24 flex flex-col gap-2">
                 <MapPin className="h-6 w-6" />
                 <span>Report Sighting</span>
               </Button>
             </Link>
-            <Link to="/articles">
+            <Link to="/articles" data-tutorial="articles-top">
               <Button variant="sunrise" className="w-full h-24 flex flex-col gap-2">
                 <FileText className="h-6 w-6" />
                 <span>Read Articles</span>
@@ -107,41 +133,67 @@ const Home = () => {
             </CardContent>
           </Card>
 
+          {/* Map Downloads */}
+          <Card className="shadow-medium bg-card/95 backdrop-blur">
+            <CardHeader>
+              <CardTitle>Adventure Essentials</CardTitle>
+              <CardDescription>Prepare for your next expedition</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="p-6 rounded-lg bg-gradient-to-br from-primary/20 to-accent/20 border-2 border-primary/30">
+                <h3 className="font-bold text-xl mb-2">Going on a New Adventure?</h3>
+                <p className="text-muted-foreground mb-4">
+                  Download detailed, offline maps for your next trip
+                </p>
+                <p className="text-2xl font-bold text-primary mb-4">Starting from $3</p>
+                <Button variant="nature" className="w-full">Browse Maps</Button>
+              </div>
+            </CardContent>
+          </Card>
+
           {/* Premium Plans */}
           <Card className="shadow-medium bg-card/95 backdrop-blur">
             <CardHeader>
               <CardTitle>Premium Plans</CardTitle>
               <CardDescription>
-                All proceeds support wildlife research and conservation
+                Or choose our all-inclusive plan for unlimited access
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="p-4 border-2 border-muted rounded-lg bg-muted/20">
-                <h3 className="font-bold mb-1 text-lg">Root - 1 Month</h3>
-                <p className="text-2xl font-bold text-primary mb-2">$7</p>
-                <p className="text-sm text-muted-foreground mb-3">Essential features for casual explorers</p>
-                <Button variant="outline" className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground">Select Plan</Button>
-              </div>
-              <div className="p-4 border-2 border-primary rounded-lg bg-primary/5">
-                <h3 className="font-bold mb-1 text-lg flex items-center gap-2">
-                  Oak - 6 Months
-                </h3>
-                <p className="text-2xl font-bold text-primary mb-2">$35</p>
-                <p className="text-sm text-muted-foreground mb-3">Best value for regular adventurers</p>
-                <Button variant="nature" className="w-full">Select Plan</Button>
-              </div>
-              <div className="p-4 border-2 border-accent rounded-lg bg-accent/10 relative overflow-hidden">
+              <div className="p-4 border-2 border-success rounded-lg bg-success/10 relative">
                 <div className="absolute top-2 right-2">
-                  <Crown className="h-6 w-6 text-accent" />
+                  <span className="text-xs font-bold bg-success text-success-foreground px-2 py-1 rounded">CURRENT PLAN</span>
                 </div>
-                <h3 className="font-bold mb-1 text-lg">Forest - 1 Year</h3>
-                <p className="text-2xl font-bold text-accent mb-2">$55</p>
-                <p className="text-sm text-muted-foreground mb-3">Ultimate experience for dedicated naturalists</p>
-                <Button className="w-full bg-accent text-accent-foreground hover:bg-accent/90">Select Plan</Button>
+                <h3 className="font-bold mb-1 text-lg">Puppy - Free</h3>
+                <p className="text-2xl font-bold text-success mb-2">$0</p>
+                <ul className="text-sm text-muted-foreground mb-3 space-y-1">
+                  <li>• Create paths</li>
+                  <li>• Navigator mode</li>
+                  <li>• Reports in your available maps</li>
+                  <li>• 5 challenges per month</li>
+                  <li>• And more</li>
+                </ul>
+              </div>
+              <div className="p-4 border-2 border-accent rounded-lg bg-gradient-to-br from-amber-100/20 to-yellow-100/20 relative overflow-hidden">
+                <div className="absolute top-2 right-2">
+                  <Crown className="h-6 w-6 text-amber-500" />
+                </div>
+                <h3 className="font-bold mb-1 text-lg">Lion - Premium</h3>
+                <p className="text-2xl font-bold text-amber-600 mb-2">$36/year</p>
+                <p className="text-xs text-muted-foreground mb-3">Only $3/month</p>
+                <ul className="text-sm text-muted-foreground mb-3 space-y-1">
+                  <li>• No-limit maps</li>
+                  <li>• Real-time notifications</li>
+                  <li>• Offline maps</li>
+                  <li>• No challenge limit</li>
+                  <li>• And more</li>
+                </ul>
+                <Button className="w-full bg-gradient-to-r from-amber-500 to-yellow-600 text-white hover:from-amber-600 hover:to-yellow-700">Upgrade to Lion</Button>
               </div>
             </CardContent>
           </Card>
         </div>
+        <Footer />
       </div>
     </Layout>
   );

@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { MapPin, Brain, Trophy } from "lucide-react";
 import { Link } from "react-router-dom";
+import Footer from "@/components/Footer";
 import gamesBg from "@/assets/games-bg.jpg";
 
 const Games = () => {
@@ -86,6 +87,7 @@ const Games = () => {
             </CardContent>
           </Card>
         </div>
+        <Footer />
       </div>
     </Layout>
   );

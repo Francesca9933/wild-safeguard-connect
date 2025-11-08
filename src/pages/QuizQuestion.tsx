@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import Footer from "@/components/Footer";
 import wolf from "@/assets/wolf.jpg";
 import gamesBg from "@/assets/games-bg.jpg";
 
@@ -91,6 +92,7 @@ const QuizQuestion = () => {
             </CardContent>
           </Card>
         </div>
+        <Footer />
       </div>
     </Layout>
   );

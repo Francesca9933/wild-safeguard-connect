@@ -23,6 +23,7 @@ const BottomNav = () => {
             <Link
               key={item.path}
               to={item.path}
+              data-tutorial={`${item.label.toLowerCase()}-bottom`}
               className={`flex flex-col items-center justify-center flex-1 h-full transition-colors ${
                 isActive
                   ? "text-primary"

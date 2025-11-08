@@ -2,6 +2,7 @@ import Layout from "@/components/Layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import Footer from "@/components/Footer";
 import terrestrial from "@/assets/terrestrial.jpg";
 import aquatic from "@/assets/aquatic.jpg";
 import tree from "@/assets/tree.jpg";
@@ -29,7 +30,6 @@ const SpeciesGuide = () => {
           className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors mb-4"
         >
           <ArrowLeft className="h-5 w-5" />
-          <span>Back to Home</span>
         </button>
         
         <div className="text-center py-6">
@@ -53,6 +53,7 @@ const SpeciesGuide = () => {
           ))}
         </div>
       </div>
+      <Footer />
     </Layout>
   );
 };

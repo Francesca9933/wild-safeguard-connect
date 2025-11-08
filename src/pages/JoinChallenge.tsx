@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import Footer from "@/components/Footer";
 import gamesBg from "@/assets/games-bg.jpg";
 
 const JoinChallenge = () => {
@@ -95,9 +96,14 @@ const JoinChallenge = () => {
               >
                 JOIN
               </Button>
+              
+              <div className="text-center text-sm text-muted-foreground mt-4">
+                You still have <span className="font-semibold text-primary">5/5</span> challenges this month
+              </div>
             </CardContent>
           </Card>
         </div>
+        <Footer />
       </div>
     </Layout>
   );

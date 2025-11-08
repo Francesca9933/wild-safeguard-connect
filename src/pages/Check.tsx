@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Search } from "lucide-react";
 import { useState } from "react";
+import Footer from "@/components/Footer";
 import checkBg from "@/assets/check-bg.jpg";
 import dolomitesMap from "@/assets/dolomites-map.jpg";
 
@@ -102,6 +103,7 @@ const Check = () => {
             </CardContent>
           </Card>
         </div>
+        <Footer />
       </div>
     </Layout>
   );

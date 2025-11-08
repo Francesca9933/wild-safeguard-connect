@@ -21,6 +21,8 @@ const Auth = () => {
 
   // Signup state
   const [signupEmail, setSignupEmail] = useState("");
+  const [signupCountry, setSignupCountry] = useState("");
+  const [signupLanguage, setSignupLanguage] = useState("");
   const [signupUsername, setSignupUsername] = useState("");
   const [signupPassword, setSignupPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -80,6 +82,9 @@ const Auth = () => {
         options: {
           data: {
             username: signupUsername,
+            country: signupCountry,
+            language: signupLanguage,
+            show_tutorial: true,
           },
           emailRedirectTo: `${window.location.origin}/`,
         },
@@ -254,6 +259,26 @@ const Auth = () => {
                     type="email"
                     value={signupEmail}
                     onChange={(e) => setSignupEmail(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="signup-country">Country</Label>
+                  <Input
+                    id="signup-country"
+                    type="text"
+                    value={signupCountry}
+                    onChange={(e) => setSignupCountry(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="signup-language">Language</Label>
+                  <Input
+                    id="signup-language"
+                    type="text"
+                    value={signupLanguage}
+                    onChange={(e) => setSignupLanguage(e.target.value)}
                     required
                   />
                 </div>
