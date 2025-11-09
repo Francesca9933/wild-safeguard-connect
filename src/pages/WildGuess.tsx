@@ -14,6 +14,7 @@ const WildGuess = () => {
   const [mapOffset, setMapOffset] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [showResult, setShowResult] = useState(false);
   const mapContainerRef = useRef<HTMLDivElement>(null);
 
   const handleMapClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -39,6 +40,15 @@ const WildGuess = () => {
 
   const handleMouseUp = () => {
     setIsDragging(false);
+  };
+
+  const handleSubmitGuess = () => {
+    setShowResult(true);
+  };
+
+  const handleContinue = () => {
+    setShowResult(false);
+    setMarkerPosition(null);
   };
 
   return (
@@ -129,12 +139,39 @@ const WildGuess = () => {
                 Click on the map to make your guess (drag to move the map)
               </p>
 
-              <Button variant="nature" className="w-full" size="lg">
+              <Button variant="nature" className="w-full" size="lg" onClick={handleSubmitGuess}>
                 Submit Guess
               </Button>
             </CardContent>
           </Card>
         </div>
+
+        {showResult && (
+          <div 
+            className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm flex items-center justify-center p-4"
+            onClick={handleContinue}
+          >
+            <Card className="max-w-lg w-full shadow-elegant bg-card/95 backdrop-blur animate-in fade-in zoom-in duration-300">
+              <CardContent className="pt-6">
+                <div className="flex gap-4 mb-4">
+                  <img 
+                    src={meerkatImg} 
+                    alt="Meerkat" 
+                    className="w-20 h-20 rounded-lg object-cover flex-shrink-0"
+                  />
+                  <div className="flex-1">
+                    <h3 className="text-lg font-bold mb-1">Wrong guess 😢</h3>
+                    <p className="text-sm text-muted-foreground">
+                      The meerkat (Suricata suricatta) or suricate is a small mongoose found in southern Africa. Meerkats are highly social, and form packs of two to 30 individuals each that occupy home ranges around 5 km² in area.
+                    </p>
+                  </div>
+                </div>
+                <p className="text-xs text-muted-foreground text-center">Tap to continue</p>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
         <Footer />
       </div>
     </Layout>
