@@ -10,6 +10,7 @@ import Footer from "@/components/Footer";
 import homeBg from "@/assets/home-bg.jpg";
 import terrestrial from "@/assets/terrestrial.jpg";
 import aquatic from "@/assets/aquatic.jpg";
+import planisphereItaly from "@/assets/planisphere-italy.jpg";
 
 const Home = () => {
   const [showTutorial, setShowTutorial] = useState(false);
@@ -130,6 +131,25 @@ const Home = () => {
                   <p className="text-xs text-muted-foreground mt-1">1 day ago</p>
                 </div>
               </div>
+            </CardContent>
+          </Card>
+
+          {/* Check Your Maps */}
+          <Card className="shadow-medium bg-card/95 backdrop-blur">
+            <CardHeader>
+              <CardTitle>Check your Maps!</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="w-full rounded-lg overflow-hidden">
+                <img 
+                  src={planisphereItaly} 
+                  alt="World planisphere with Italy highlighted" 
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+              <p className="text-sm text-muted-foreground text-center">
+                All the maps you unblock will color your planisphere to always remember the wonderful places you have been to
+              </p>
             </CardContent>
           </Card>
 

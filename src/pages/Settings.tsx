@@ -1,6 +1,6 @@
 import Layout from "@/components/Layout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ChevronRight, User, Lock, Users, Activity, Globe, LogOut } from "lucide-react";
+import { ChevronRight, User, Lock, Users, Activity, Globe, LogOut, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -44,9 +44,18 @@ const Settings = () => {
         </div>
 
         <div className="relative z-10 p-4 space-y-6">
-          <div className="text-center py-6">
-            <h1 className="text-3xl font-bold mb-2">Settings</h1>
-            <p className="text-muted-foreground">Manage your WildCall experience</p>
+          <div className="flex items-center justify-between py-6">
+            <button
+              onClick={() => navigate(-1)}
+              className="p-2 hover:bg-card/50 rounded-full transition-colors"
+            >
+              <ArrowLeft className="h-6 w-6" />
+            </button>
+            <div className="flex-1 text-center">
+              <h1 className="text-3xl font-bold mb-2">Settings</h1>
+              <p className="text-muted-foreground">Manage your WildCall experience</p>
+            </div>
+            <div className="w-10" />
           </div>
 
           <div className="space-y-3">
