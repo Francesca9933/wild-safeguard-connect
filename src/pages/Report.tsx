@@ -25,6 +25,23 @@ const Report = () => {
   const [notes, setNotes] = useState("");
   const [pawMarkers, setPawMarkers] = useState<PawMarker[]>([]);
 
+  const cameraInputRef = useRef<HTMLInputElement>(null);
+
+  const handleImageCapture = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      console.log("Captured image file:", file.name);
+      toast({
+        title: "Photo Captured!",
+        description: `Ready to upload: ${file.name}`,
+      });
+      e.target.value = '';
+  };
+
+  const HandlePhotoClick = () => {
+    cameraInputRef.current?.click();
+  };
+
   const handleMapClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width) * 100;
@@ -60,6 +77,16 @@ const Report = () => {
         </div>
 
         <div className="relative z-10 p-4 space-y-6">
+          {/* HIDDEN INPUT ELEMENT */}
+          <input
+            type="file"
+            accept="image/*"
+            capture="environment" // Suggests using the rear camera on mobile
+            ref={cameraInputRef}
+            className="hidden" // Hides the element visually
+            onChange={handleImageCapture}
+         />
+         {/* END HIDDEN INPUT */}
           <div className="text-center py-6">
             <h1 className="text-3xl font-bold mb-2">Report a Sighting</h1>
             <p className="text-muted-foreground">Help us track wildlife in your area</p>
@@ -151,7 +178,7 @@ const Report = () => {
               <p className="text-sm font-medium mb-3">Don't know what you saw?</p>
               <div className="space-y-3">
                 <div className="flex gap-2">
-                  <Button variant="outline" className="flex-1">
+                  <Button variant="outline" className="flex-1" onClick={handleTakePhotoClick}>
                     <Camera className="mr-2 h-4 w-4" />
                     Take Photo
                   </Button>
