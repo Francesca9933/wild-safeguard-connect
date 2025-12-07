@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Camera, Upload, Mic } from "lucide-react";
+import { Camera, Upload, Mic, Search } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import Footer from "@/components/Footer";
@@ -88,6 +88,19 @@ const Report = () => {
                   onClick={handleMapClick}
                 >
                   <img src={mapPlaceholder} alt="Map" className="w-full h-full object-cover" />
+                  
+                  {/* Search bar overlay */}
+                  <div className="absolute top-2 left-2 right-2 z-10">
+                    <div className="relative">
+                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                      <Input
+                        placeholder="Search for a place..."
+                        className="pl-9 bg-background/95 backdrop-blur-sm shadow-md border-border/50"
+                        onClick={(e) => e.stopPropagation()}
+                      />
+                    </div>
+                  </div>
+                  
                   {pawMarkers.map((marker) => (
                     <div
                       key={marker.id}
