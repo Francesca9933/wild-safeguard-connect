@@ -193,14 +193,15 @@ const CreateChallenge = () => {
                         <Copy className="h-4 w-4" />
                       </Button>
                     </div>
-                    <div className="flex items-center justify-between">
-                      <div className="flex-1 mr-2">
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="min-w-0 flex-1">
                         <Label className="text-xs text-muted-foreground">Challenge Link</Label>
-                        <p className="font-mono text-sm truncate">{challengeLink}</p>
+                        <p className="font-mono text-sm truncate overflow-hidden">{challengeLink}</p>
                       </div>
                       <Button
                         size="sm"
                         variant="ghost"
+                        className="flex-shrink-0"
                         onClick={() => copyToClipboard(challengeLink, "Link")}
                       >
                         <Copy className="h-4 w-4" />
