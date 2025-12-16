@@ -26,6 +26,8 @@ const Report = () => {
   const [pawMarkers, setPawMarkers] = useState<PawMarker[]>([]);
 
   const cameraInputRef = useRef<HTMLInputElement>(null);
+  const photoInputRef = useRef<HTMLInputElement>(null);
+  const audioInputRef = useRef<HTMLInputElement>(null);
 
   const handleImageCapture = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -41,6 +43,38 @@ const Report = () => {
 
   const HandlePhotoClick = () => {
     cameraInputRef.current?.click();
+  };
+
+  const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      console.log("Uploaded image file:", file.name);
+      toast({
+        title: "Photo Uploaded!",
+        description: `Ready to use: ${file.name}`,
+      });
+      e.target.value = '';
+    }
+  };
+
+  const HandleUploadPhotoClick = () => {
+    photoInputRef.current?.click();
+  };
+
+  const handleAudioUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      console.log("Uploaded audio file:", file.name);
+      toast({
+        title: "Audio Uploaded!",
+        description: `Ready to use: ${file.name}`,
+      });
+      e.target.value = '';
+    }
+  };
+  
+  const HandleUploadAudioClick = () => {
+    audioInputRef.current?.click();
   };
 
   const handleMapClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -78,7 +112,7 @@ const Report = () => {
         </div>
 
         <div className="relative z-10 p-4 space-y-6">
-          {/* HIDDEN INPUT ELEMENT */}
+          {/* HIDDEN INPUT ELEMENT FOR CAMERA */}
           <input
             type="file"
             accept="image/*"
@@ -86,6 +120,24 @@ const Report = () => {
             ref={cameraInputRef}
             className="hidden" // Hides the element visually
             onChange={handleImageCapture}
+         />
+
+          {/* HIDDEN INPUT ELEMENT FOR PHOTO UPLOAD (GALLERY) */}
+          <input
+            type="file"
+            accept="image/*"
+            ref={photoInputRef}
+            className="hidden" 
+            onChange={handlePhotoUpload}
+         />
+
+          {/* HIDDEN INPUT ELEMENT FOR AUDIO UPLOAD (VOICE MEMOS) */}
+          <input
+            type="file"
+            accept="audio/*" // Accepts common audio file types
+            ref={audioInputRef}
+            className="hidden"
+            onChange={handleAudioUpload}
          />
          {/* END HIDDEN INPUT */}
           <div className="text-center py-6">
@@ -183,7 +235,7 @@ const Report = () => {
                     <Camera className="mr-2 h-4 w-4" />
                     Take Photo
                   </Button>
-                  <Button variant="outline" className="flex-1">
+                  <Button variant="outline" className="flex-1" onClick={HandleUploadPhotoClick}>
                     <Upload className="mr-2 h-4 w-4" />
                     Upload Photo
                   </Button>
@@ -193,7 +245,7 @@ const Report = () => {
                     <Mic className="mr-2 h-4 w-4" />
                     Record Audio
                   </Button>
-                  <Button variant="outline" className="flex-1">
+                  <Button variant="outline" className="flex-1" onClick={HandleUploadAudioClick}>
                     <Upload className="mr-2 h-4 w-4" />
                     Upload Audio
                   </Button>
