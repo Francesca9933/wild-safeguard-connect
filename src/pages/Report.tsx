@@ -71,10 +71,12 @@ const Report = () => {
         description: `Ready to use: ${file.name}`,
       });
       e.target.value = '';
+    }
+  };
 
   const HandleRecordAudioClick = () => {
     audioRecordInputRef.current?.click();
-};
+  };
 
   const handleAudioUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -160,7 +162,7 @@ const Report = () => {
           <input
             type="file"
             accept="audio/*" // Accepts common audio file types
-            ref={audioUploadInputRef}
+            ref={audioInputRef}
             className="hidden"
             onChange={handleAudioUpload}
          />
