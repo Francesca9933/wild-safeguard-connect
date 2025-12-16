@@ -99,7 +99,22 @@ const Report = () => {
     const x = ((e.clientX - rect.left) / rect.width) * 100;
     const y = ((e.clientY - rect.top) / rect.height) * 100;
     
-    setPawMarkers([...pawMarkers, { x, y, id: Date.now() }]);
+    // Check if clicking near existing marker (within 5% threshold) to remove it
+    const existingMarker = pawMarkers.find(
+      (marker) => Math.abs(marker.x - x) < 5 && Math.abs(marker.y - y) < 5
+    );
+    
+    if (existingMarker) {
+      // Remove the marker if clicking on same spot
+      setPawMarkers([]);
+      toast({
+        title: "Marker Removed",
+        description: "Click anywhere on the map to place a new marker.",
+      });
+    } else {
+      // Replace with single new marker
+      setPawMarkers([{ x, y, id: Date.now() }]);
+    }
   };
 
   const handleSubmit = () => {
