@@ -27,6 +27,7 @@ const Report = () => {
 
   const cameraInputRef = useRef<HTMLInputElement>(null);
   const photoInputRef = useRef<HTMLInputElement>(null);
+  const audioRecordInputRef = useRef<HTMLInputElement>(null);
   const audioInputRef = useRef<HTMLInputElement>(null);
 
   const handleImageCapture = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,6 +61,20 @@ const Report = () => {
   const HandleUploadPhotoClick = () => {
     photoInputRef.current?.click();
   };
+
+  const handleAudioRecord = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      console.log("Recorded audio file:", file.name);
+      toast({
+        title: "Audio Recorded!",
+        description: `Ready to use: ${file.name}`,
+      });
+      e.target.value = '';
+
+  const HandleRecordAudioClick = () => {
+    audioRecordInputRef.current?.click();
+};
 
   const handleAudioUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -135,16 +150,17 @@ const Report = () => {
           <input
             type="file"
             accept="audio/*" // Accepts common audio file types
-            ref={audioInputRef}
+            capture="user" // This suggests using microphone for recording
+            ref={audioRecordInputRef}
             className="hidden"
-            onChange={handleAudioUpload}
+            onChange={handleAudioRecord}
          />
 
           {/* HIDDEN INPUT ELEMENT FOR AUDIO UPLOAD (VOICE MEMOS) */}
           <input
             type="file"
             accept="audio/*" // Accepts common audio file types
-            ref={audioInputRef}
+            ref={audioUploadInputRef}
             className="hidden"
             onChange={handleAudioUpload}
          />
@@ -251,7 +267,7 @@ const Report = () => {
                   </Button>
                 </div>
                 <div className="flex gap-2">
-                  <Button variant="outline" className="flex-1">
+                  <Button variant="outline" className="flex-1" onClick={HandleRecordAudioClick}>
                     <Mic className="mr-2 h-4 w-4" />
                     Record Audio
                   </Button>
