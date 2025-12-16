@@ -131,6 +131,15 @@ const Report = () => {
             onChange={handlePhotoUpload}
          />
 
+          {/* HIDDEN INPUT ELEMENT FOR AUDIO RECORD (VOICE MEMOS) */}
+          <input
+            type="file"
+            accept="audio/*" // Accepts common audio file types
+            ref={audioInputRef}
+            className="hidden"
+            onChange={handleAudioUpload}
+         />
+
           {/* HIDDEN INPUT ELEMENT FOR AUDIO UPLOAD (VOICE MEMOS) */}
           <input
             type="file"
@@ -140,6 +149,7 @@ const Report = () => {
             onChange={handleAudioUpload}
          />
          {/* END HIDDEN INPUT */}
+          
           <div className="text-center py-6">
             <h1 className="text-3xl font-bold mb-2">Report a Sighting</h1>
             <p className="text-muted-foreground">Help us track wildlife in your area</p>
