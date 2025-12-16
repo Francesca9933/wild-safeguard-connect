@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Camera, Upload, Mic, Search } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
 import Footer from "@/components/Footer";
 import reportBg from "@/assets/report-bg.jpg";
@@ -36,6 +36,7 @@ const Report = () => {
         description: `Ready to upload: ${file.name}`,
       });
       e.target.value = '';
+    }
   };
 
   const HandlePhotoClick = () => {
@@ -178,7 +179,7 @@ const Report = () => {
               <p className="text-sm font-medium mb-3">Don't know what you saw?</p>
               <div className="space-y-3">
                 <div className="flex gap-2">
-                  <Button variant="outline" className="flex-1" onClick={handleTakePhotoClick}>
+                  <Button variant="outline" className="flex-1" onClick={HandlePhotoClick}>
                     <Camera className="mr-2 h-4 w-4" />
                     Take Photo
                   </Button>
