@@ -33,12 +33,9 @@ const TopNav = () => {
         </button>
 
         {/* Notifications */}
-        <Link
-          to="/language-notifications"
-          className="flex flex-col items-center justify-center flex-1 h-full text-muted-foreground hover:text-foreground transition-colors"
-        >
+        <button className="flex flex-col items-center justify-center flex-1 h-full text-muted-foreground hover:text-foreground transition-colors">
           <Bell className="h-5 w-5" />
-        </Link>
+        </button>
 
         {/* Help */}
         <DropdownMenu>
