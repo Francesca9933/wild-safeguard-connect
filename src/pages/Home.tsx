@@ -1,7 +1,7 @@
 import Layout from "@/components/Layout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { MapPin, FileText, Crown } from "lucide-react";
+import { MapPin, Search, Crown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -65,10 +65,10 @@ const Home = () => {
                 <span>Report Sighting</span>
               </Button>
             </Link>
-            <Link to="/articles" data-tutorial="articles-top">
+            <Link to="/check" data-tutorial="check-top">
               <Button variant="sunrise" className="w-full h-24 flex flex-col gap-2">
-                <FileText className="h-6 w-6" />
-                <span>Read Articles</span>
+                <Search className="h-6 w-6" />
+                <span>Check Path</span>
               </Button>
             </Link>
           </div>
@@ -97,40 +97,6 @@ const Home = () => {
               <Link to="/species-guide">
                 <Button variant="outline" className="w-full mt-4">View Full Guide</Button>
               </Link>
-            </CardContent>
-          </Card>
-
-          {/* Recent Sightings */}
-          <Card className="shadow-medium bg-card/95 backdrop-blur">
-            <CardHeader>
-              <CardTitle>Recent Sightings</CardTitle>
-              <CardDescription>Latest wildlife observations from the community</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex items-start gap-3 p-3 rounded-lg bg-muted/50">
-                <MapPin className="h-5 w-5 text-primary mt-1" />
-                <div>
-                  <p className="font-semibold">Mountain Goat</p>
-                  <p className="text-sm text-muted-foreground">Rocky Mountains, Colorado</p>
-                  <p className="text-xs text-muted-foreground mt-1">2 hours ago</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3 p-3 rounded-lg bg-muted/50">
-                <MapPin className="h-5 w-5 text-primary mt-1" />
-                <div>
-                  <p className="font-semibold">Bald Eagle</p>
-                  <p className="text-sm text-muted-foreground">Lake Superior, Minnesota</p>
-                  <p className="text-xs text-muted-foreground mt-1">5 hours ago</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3 p-3 rounded-lg bg-muted/50">
-                <MapPin className="h-5 w-5 text-primary mt-1" />
-                <div>
-                  <p className="font-semibold">Gray Wolf</p>
-                  <p className="text-sm text-muted-foreground">Yellowstone, Wyoming</p>
-                  <p className="text-xs text-muted-foreground mt-1">1 day ago</p>
-                </div>
-              </div>
             </CardContent>
           </Card>
 

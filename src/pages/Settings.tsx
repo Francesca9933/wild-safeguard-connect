@@ -24,7 +24,7 @@ const Settings = () => {
     { icon: Lock, title: "Privacy", description: "Control your privacy settings", onClick: () => {} },
     { icon: Users, title: "Friends List", description: "View and manage your connections", onClick: () => {} },
     { icon: Activity, title: "Your Activity", description: "See your sightings and contributions", onClick: () => {} },
-    { icon: Globe, title: "Language and Notifications", description: "Customize app language and alerts", onClick: () => {} },
+    { icon: Globe, title: "Language and Notifications", description: "Customize app language and alerts", onClick: () => navigate("/language-notifications") },
     { icon: LogOut, title: "Exit", description: "Log-out from your account", onClick: handleLogout },
   ];
 

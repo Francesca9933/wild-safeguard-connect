@@ -20,6 +20,7 @@ import QuizQuestion from "./pages/QuizQuestion";
 import WildGuess from "./pages/WildGuess";
 import JoinChallenge from "./pages/JoinChallenge";
 import CreateChallenge from "./pages/CreateChallenge";
+import LanguageNotifications from "./pages/LanguageNotifications";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -163,6 +164,14 @@ const App = () => {
               element={
                 <ProtectedRoute session={session}>
                   <CreateChallenge />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/language-notifications"
+              element={
+                <ProtectedRoute session={session}>
+                  <LanguageNotifications />
                 </ProtectedRoute>
               }
             />
