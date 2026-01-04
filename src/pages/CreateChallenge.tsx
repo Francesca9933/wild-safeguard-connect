@@ -31,7 +31,26 @@ const CreateChallenge = () => {
     { id: "guesses", text: "Collect 10 Wild Guesses", image: quizIcon },
   ];
 
+  const validateDateTime = (): boolean => {
+    if (!endDate || !endTime) return true; // Allow empty values
+
+    const now = new Date();
+    const selectedDateTime = new Date(`${endDate}T${endTime}`);
+
+    if (selectedDateTime <= now) {
+      toast({
+        title: "Invalid Date/Time",
+        description: "Please select a future date and time. The end date and time must be after the current moment.",
+        variant: "destructive",
+      });
+      return false;
+    }
+    return true;
+  };
+
   const handleShare = () => {
+    if (!validateDateTime()) return;
+
     setShowShare(true);
     toast({
       title: "Challenge Created!",

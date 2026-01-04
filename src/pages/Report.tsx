@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Camera, Upload, Mic, Search } from "lucide-react";
+import { Camera, Upload, Mic, Search, MapPin, X } from "lucide-react";
 import { useState, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
 import Footer from "@/components/Footer";
@@ -18,22 +18,36 @@ interface PawMarker {
   id: number;
 }
 
+interface UploadedFile {
+  name: string;
+  type: "photo" | "audio";
+  id: number;
+}
+
 const Report = () => {
   const { toast } = useToast();
   const [species, setSpecies] = useState("");
   const [pathType, setPathType] = useState("");
   const [notes, setNotes] = useState("");
   const [pawMarkers, setPawMarkers] = useState<PawMarker[]>([]);
+  const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
 
   const cameraInputRef = useRef<HTMLInputElement>(null);
   const photoInputRef = useRef<HTMLInputElement>(null);
   const audioRecordInputRef = useRef<HTMLInputElement>(null);
   const audioInputRef = useRef<HTMLInputElement>(null);
+  const dontKnowRef = useRef<HTMLDivElement>(null);
+
+  const scrollToDontKnow = () => {
+    dontKnowRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   const handleImageCapture = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       console.log("Captured image file:", file.name);
+      const newFile: UploadedFile = { name: file.name, type: "photo", id: Date.now() };
+      setUploadedFiles((prev) => [...prev, newFile]);
       toast({
         title: "Photo Captured!",
         description: `Ready to upload: ${file.name}`,
@@ -50,6 +64,8 @@ const Report = () => {
     const file = e.target.files?.[0];
     if (file) {
       console.log("Uploaded image file:", file.name);
+      const newFile: UploadedFile = { name: file.name, type: "photo", id: Date.now() };
+      setUploadedFiles((prev) => [...prev, newFile]);
       toast({
         title: "Photo Uploaded!",
         description: `Ready to use: ${file.name}`,
@@ -66,6 +82,8 @@ const Report = () => {
     const file = e.target.files?.[0];
     if (file) {
       console.log("Recorded audio file:", file.name);
+      const newFile: UploadedFile = { name: file.name, type: "audio", id: Date.now() };
+      setUploadedFiles((prev) => [...prev, newFile]);
       toast({
         title: "Audio Recorded!",
         description: `Ready to use: ${file.name}`,
@@ -82,6 +100,8 @@ const Report = () => {
     const file = e.target.files?.[0];
     if (file) {
       console.log("Uploaded audio file:", file.name);
+      const newFile: UploadedFile = { name: file.name, type: "audio", id: Date.now() };
+      setUploadedFiles((prev) => [...prev, newFile]);
       toast({
         title: "Audio Uploaded!",
         description: `Ready to use: ${file.name}`,
@@ -92,6 +112,10 @@ const Report = () => {
   
   const HandleUploadAudioClick = () => {
     audioInputRef.current?.click();
+  };
+
+  const removeUploadedFile = (id: number) => {
+    setUploadedFiles((prev) => prev.filter((file) => file.id !== id));
   };
 
   const handleMapClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -122,6 +146,7 @@ const Report = () => {
     setPathType("");
     setNotes("");
     setPawMarkers([]);
+    setUploadedFiles([]);
     toast({
       title: "Report Submitted!",
       description: "Your sighting has been successfully recorded.",
@@ -148,9 +173,9 @@ const Report = () => {
           <input
             type="file"
             accept="image/*"
-            capture="environment" // Suggests using the rear camera on mobile
+            capture="environment"
             ref={cameraInputRef}
-            className="hidden" // Hides the element visually
+            className="hidden"
             onChange={handleImageCapture}
          />
 
@@ -166,8 +191,8 @@ const Report = () => {
           {/* HIDDEN INPUT ELEMENT FOR AUDIO RECORD (VOICE MEMOS) */}
           <input
             type="file"
-            accept="audio/*" // Accepts common audio file types
-            capture="user" // This suggests using microphone for recording
+            accept="audio/*"
+            capture="user"
             ref={audioRecordInputRef}
             className="hidden"
             onChange={handleAudioRecord}
@@ -176,12 +201,11 @@ const Report = () => {
           {/* HIDDEN INPUT ELEMENT FOR AUDIO UPLOAD (VOICE MEMOS) */}
           <input
             type="file"
-            accept="audio/*" // Accepts common audio file types
+            accept="audio/*"
             ref={audioInputRef}
             className="hidden"
             onChange={handleAudioUpload}
          />
-         {/* END HIDDEN INPUT */}
           
           <div className="text-center py-6">
             <h1 className="text-3xl font-bold mb-2">Report a Sighting</h1>
@@ -202,6 +226,12 @@ const Report = () => {
                   value={species}
                   onChange={(e) => setSpecies(e.target.value)}
                 />
+                <button
+                  onClick={scrollToDontKnow}
+                  className="text-sm text-primary underline hover:text-primary/80 transition-colors"
+                >
+                  Don't know what you saw?
+                </button>
               </div>
 
               <div className="space-y-2">
@@ -270,7 +300,7 @@ const Report = () => {
                 />
               </div>
 
-            <div className="pt-4 border-t">
+            <div ref={dontKnowRef} className="pt-4 border-t">
               <p className="text-sm font-medium mb-3">Don't know what you saw?</p>
               <div className="space-y-3">
                 <div className="flex gap-2">
@@ -296,9 +326,68 @@ const Report = () => {
               </div>
             </div>
 
+              {/* Uploaded Files Display */}
+              {uploadedFiles.length > 0 && (
+                <div className="pt-4 border-t">
+                  <p className="text-sm font-medium mb-3">Uploaded Files</p>
+                  <div className="flex flex-wrap gap-2">
+                    {uploadedFiles.map((file, index) => (
+                      <div
+                        key={file.id}
+                        className="flex items-center gap-2 bg-muted/50 px-3 py-2 rounded-lg text-sm"
+                      >
+                        <span className="text-primary font-medium">
+                          {file.type === "photo" ? "📷" : "🎵"} {file.type}{index + 1}
+                        </span>
+                        <button
+                          onClick={() => removeUploadedFile(file.id)}
+                          className="text-muted-foreground hover:text-destructive transition-colors"
+                        >
+                          <X className="h-4 w-4" />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               <Button className="w-full" variant="nature" onClick={handleSubmit}>
                 Submit Report
               </Button>
+            </CardContent>
+          </Card>
+
+          {/* Recent Sightings */}
+          <Card className="shadow-medium bg-card/95 backdrop-blur">
+            <CardHeader>
+              <CardTitle>Recent Sightings</CardTitle>
+              <CardDescription>Latest wildlife observations from the community</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex items-start gap-3 p-3 rounded-lg bg-muted/50">
+                <MapPin className="h-5 w-5 text-primary mt-1" />
+                <div>
+                  <p className="font-semibold">Mountain Goat</p>
+                  <p className="text-sm text-muted-foreground">Rocky Mountains, Colorado</p>
+                  <p className="text-xs text-muted-foreground mt-1">2 hours ago</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3 p-3 rounded-lg bg-muted/50">
+                <MapPin className="h-5 w-5 text-primary mt-1" />
+                <div>
+                  <p className="font-semibold">Bald Eagle</p>
+                  <p className="text-sm text-muted-foreground">Lake Superior, Minnesota</p>
+                  <p className="text-xs text-muted-foreground mt-1">5 hours ago</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3 p-3 rounded-lg bg-muted/50">
+                <MapPin className="h-5 w-5 text-primary mt-1" />
+                <div>
+                  <p className="font-semibold">Gray Wolf</p>
+                  <p className="text-sm text-muted-foreground">Yellowstone, Wyoming</p>
+                  <p className="text-xs text-muted-foreground mt-1">1 day ago</p>
+                </div>
+              </div>
             </CardContent>
           </Card>
         </div>

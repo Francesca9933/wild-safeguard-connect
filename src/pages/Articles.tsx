@@ -39,7 +39,7 @@ const Articles = () => {
               <p className="text-sm text-muted-foreground mb-3">
                 Enable notifications in settings to get alerts when new articles are published
               </p>
-              <Link to="/settings">
+              <Link to="/language-notifications">
                 <Button variant="outline" className="w-full">Enable Notifications</Button>
               </Link>
             </CardContent>
