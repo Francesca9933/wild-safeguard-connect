@@ -1,7 +1,7 @@
 import Layout from "@/components/Layout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { MapPin, Search, Crown } from "lucide-react";
+import { MapPin, CheckSquare, Crown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -67,7 +67,7 @@ const Home = () => {
             </Link>
             <Link to="/check" data-tutorial="check-top">
               <Button variant="sunrise" className="w-full h-24 flex flex-col gap-2">
-                <Search className="h-6 w-6" />
+                <CheckSquare className="h-6 w-6" />
                 <span>Check Path</span>
               </Button>
             </Link>
