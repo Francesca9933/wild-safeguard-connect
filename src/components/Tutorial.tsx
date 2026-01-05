@@ -8,7 +8,12 @@ interface TutorialStep {
   multiple?: string[]; // For highlighting multiple elements at once
 }
 
-const Tutorial = ({ onComplete }: { onComplete: () => void }) => {
+interface TutorialProps {
+  onComplete: () => void;
+  skipPermissions?: boolean;
+}
+
+const Tutorial = ({ onComplete, skipPermissions = false }: TutorialProps) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [showGPSRequest, setShowGPSRequest] = useState(false);
   const [showNotificationRequest, setShowNotificationRequest] = useState(false);
@@ -41,6 +46,8 @@ const Tutorial = ({ onComplete }: { onComplete: () => void }) => {
   const handleNextStep = () => {
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1);
+    } else if (skipPermissions) {
+      onComplete();
     } else if (!showGPSRequest) {
       setShowGPSRequest(true);
     } else if (!showNotificationRequest) {
