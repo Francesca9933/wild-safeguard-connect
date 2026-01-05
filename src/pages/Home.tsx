@@ -14,12 +14,14 @@ import planisphereItaly from "@/assets/planisphere-italy.jpg";
 
 const Home = () => {
   const [showTutorial, setShowTutorial] = useState(false);
+  const [skipPermissions, setSkipPermissions] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     const checkTutorial = async () => {
-      // Check if tutorial=true in URL params
+      // Check if tutorial=true in URL params (restarting tutorial)
       if (searchParams.get('tutorial') === 'true') {
+        setSkipPermissions(true);
         setShowTutorial(true);
         // Remove the query param after starting tutorial
         setSearchParams({});
@@ -28,6 +30,7 @@ const Home = () => {
       
       const { data: { user } } = await supabase.auth.getUser();
       if (user?.user_metadata?.show_tutorial) {
+        setSkipPermissions(false);
         setShowTutorial(true);
       }
     };
@@ -42,10 +45,11 @@ const Home = () => {
       });
     }
     setShowTutorial(false);
+    setSkipPermissions(false);
   };
   return (
     <Layout>
-      {showTutorial && <Tutorial onComplete={handleTutorialComplete} />}
+      {showTutorial && <Tutorial onComplete={handleTutorialComplete} skipPermissions={skipPermissions} />}
       <div className="relative min-h-screen">
         {/* Background Image */}
         <div 
