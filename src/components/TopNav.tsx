@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Settings, MessageCircle, Bell, HelpCircle, User, Search } from "lucide-react";
 import {
   DropdownMenu,
@@ -8,8 +8,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 const TopNav = () => {
+  const navigate = useNavigate();
+
   const helpItems = [
-    { label: "Check the Tutorial again", action: () => {} },
+    { label: "Check the Tutorial again", action: () => navigate("/?tutorial=true") },
     { label: "How to report an animal?", action: () => {} },
     { label: "Where can I buy new maps?", action: () => {} },
     { label: "How do challenges work?", action: () => {} },

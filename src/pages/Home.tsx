@@ -2,7 +2,7 @@ import Layout from "@/components/Layout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MapPin, CheckSquare, Crown } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import Tutorial from "@/components/Tutorial";
@@ -14,16 +14,25 @@ import planisphereItaly from "@/assets/planisphere-italy.jpg";
 
 const Home = () => {
   const [showTutorial, setShowTutorial] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     const checkTutorial = async () => {
+      // Check if tutorial=true in URL params
+      if (searchParams.get('tutorial') === 'true') {
+        setShowTutorial(true);
+        // Remove the query param after starting tutorial
+        setSearchParams({});
+        return;
+      }
+      
       const { data: { user } } = await supabase.auth.getUser();
       if (user?.user_metadata?.show_tutorial) {
         setShowTutorial(true);
       }
     };
     checkTutorial();
-  }, []);
+  }, [searchParams, setSearchParams]);
 
   const handleTutorialComplete = async () => {
     const { data: { user } } = await supabase.auth.getUser();
